@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { MessageService} from "./message.service";
 import { HeroService} from "./hero.service";
+import {HttpClient} from "@angular/common/http"
+
+type linkType = {
+  dashboard:string;
+  heroes:string;
+}
 
 @Component({
   selector: 'app-root',
@@ -9,15 +15,18 @@ import { HeroService} from "./hero.service";
 })
 export class AppComponent {
   title = 'Tour of Heroes';
-  heroesNumber = 0;
+  linkTitle: linkType = {
+    dashboard:"",
+    heroes:""
+  };
 
   constructor(
       private messageService: MessageService,
-      public heroService: HeroService,
+      private http:HttpClient,
       ) {
-    this.heroService.heroesChange$.subscribe(res => {
-        this.heroesNumber = res.length;
-    });
+    this.http.get('assets/data/dashboard-link.json',{ responseType: 'json' }).subscribe(res => {
+      this.linkTitle = res as linkType;
+    })
   }
 
   clearTop5Msg(){

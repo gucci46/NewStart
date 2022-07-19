@@ -2,8 +2,8 @@
   <button class="clear" (click)="clearTop5Msg()">Clear top 5 messages</button>
 </h1>
 <nav>
-  <a routerLink="/cl-dashboard">Dashboard</a>
-  <a routerLink="/cl-heroes">{{heroesNumber}} Heroes</a>
+  <a routerLink="/cl-dashboard"> {{linkTitle.dashboard}}</a>
+  <a routerLink="/cl-heroes">{{linkTitle.heroes}}</a>
   <a routerLink="/bonusPoint">bonusPoint</a>
 </nav>
 <router-outlet></router-outlet>
