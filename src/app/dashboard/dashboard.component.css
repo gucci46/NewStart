@@ -65,7 +65,7 @@ h4 {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .grid {
     flex-wrap: wrap;
   }
@@ -77,6 +77,26 @@ h4 {
 
   .grid-pad > [class*='col-']:last-of-type {
     min-width: 100%;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  [class*='col-']:nth-child(even) {
+    float: left;
+    padding-right: 0;
+    padding-bottom: 20px;
+  }
+
+  .grid {
+    flex-wrap: wrap;
+  }
+
+  .col {
+    min-width: 45%;
+  }
+
+  .grid-pad > [class*='col-']:last-of-type {
     padding-right: 0;
   }
 }
