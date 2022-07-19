@@ -64,3 +64,19 @@ h4 {
     min-width: 60px;
   }
 }
+
+@media (max-width: 768px) {
+  .grid {
+    flex-wrap: wrap;
+  }
+
+  .col {
+    min-width: 100%;
+    padding-right: 0;
+  }
+
+  .grid-pad > [class*='col-']:last-of-type {
+    min-width: 100%;
+    padding-right: 0;
+  }
+}
