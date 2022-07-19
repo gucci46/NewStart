@@ -11,4 +11,8 @@ export class MessageService {
   clear() {
     this.messages = [];
   }
+
+  clearMessages(num:number = 5){
+    this.messages.splice(0,num);
+  }
 }
