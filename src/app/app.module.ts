@@ -35,11 +35,8 @@ import { BonusPointModule } from './bonus-point/bonus-point.module';
   ],
   declarations: [
     AppComponent,
-    DashboardComponent,
-    HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
   ],
   providers: [ HeroService, MessageService ],
   bootstrap: [ AppComponent ]
