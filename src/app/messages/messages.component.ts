@@ -13,4 +13,11 @@ export class MessagesComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteConfirm(){
+    let result = confirm("您確定要清空訊息嗎？清空就回不來囉！");
+    if(result){
+      this.messageService.clear();
+    }
+  }
+
 }
