@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {MessageService} from "./message.service";
+import { MessageService} from "./message.service";
+import { HeroService} from "./hero.service";
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,15 @@ import {MessageService} from "./message.service";
 })
 export class AppComponent {
   title = 'Tour of Heroes';
+  heroesNumber = 0;
 
-  constructor(private messageService:MessageService) {
+  constructor(
+      private messageService: MessageService,
+      public heroService: HeroService,
+      ) {
+    this.heroService.heroesChange$.subscribe(res => {
+        this.heroesNumber = res.length;
+    });
   }
 
   clearTop5Msg(){
