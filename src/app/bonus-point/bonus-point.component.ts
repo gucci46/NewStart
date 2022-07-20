@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsJs1Service } from './bs-js1.service';
-import { of } from 'rxjs';
+import { of, forkJoin } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -10,15 +10,12 @@ import { tap } from 'rxjs/operators';
 })
 export class BonusPointComponent implements OnInit {
 
+  readonly BOX = ['f1','f2','f3','f4','','f6','f7','f8','f9'];
   constructor(
     private bsJs1Service: BsJs1Service,
   ) { }
 
-
-
-
   ngOnInit() {
-
   }
 
   redirectToKeiPage() {
@@ -31,6 +28,8 @@ export class BonusPointComponent implements OnInit {
 
   answerCookie1() {
     //ToDo..
+    document.domain = '.localhost:4200';
+    document.cookie = 'answerCookie1:Hey!!!!!!!!!!!!!';
   }
 
   answerRxjs1() {
@@ -45,17 +44,26 @@ export class BonusPointComponent implements OnInit {
     //  third
 
     // ToDo...
+    const stream = forkJoin(first$,second$,third$);
+    const sub = stream.subscribe(val => console.log('finish'));
   }
 
 
   answerJs1() {
     let result: string;
+    let valueObj:{[key:number]:number[]} = {};
     this.bsJs1Service.getSample()
       .forEachChilds((child) => {
         // ToDo : 實作你的解決方案...
-        result = 'ToDo...';
+        let parentValue = child.parent.value;
+        let childValue = child.value;
+        (valueObj[parentValue] !== undefined) ? valueObj[parentValue].push(childValue) : valueObj[parentValue]=[childValue];
       });
 
+    Object.keys(valueObj).map((key,index)=>{
+      ( typeof result !== 'undefined' ) ? result += " , " : result = "";
+      result += valueObj[key].join(" , ") + ` ,  ${key}`;
+    })
     // 預期alert的結果 => js 1 answer : child_1_1 , child_1_2 , parent_1 , child_2_1 ,  parent_2 ,child_3_1 , child_3_2 , child_3_3 , parent_3
     alert(`js 1 answer : ${result}`)
   }
